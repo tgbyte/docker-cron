@@ -6,6 +6,6 @@ RUN apt-get update && \
 RUN mkdir /entrypoint.d
 
 ADD ./entrypoint.sh /
-CMD ['/entrypoint.sh']
+CMD ["/entrypoint.sh"]
 
 ONBUILD ADD ./cron/ /etc/cron/
