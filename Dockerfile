@@ -8,4 +8,4 @@ RUN mkdir /entrypoint.d
 ADD ./entrypoint.sh /
 CMD ["/entrypoint.sh"]
 
-ONBUILD ADD ./cron/ /etc/cron/
+ONBUILD ADD ./cron/ /etc/
