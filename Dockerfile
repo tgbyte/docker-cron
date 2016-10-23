@@ -11,6 +11,7 @@ RUN set -x \
          curl \
          wget \
     && sed -i "s/httpredir.debian.org/`curl -s -D - http://httpredir.debian.org/demo/debian/ | awk '/^Link:/ { print $2 }' | sed -e 's@<http://\(.*\)/debian/>;@\1@g'`/" /etc/apt/sources.list \
+    && apt-get update -qq \
     && apt-get -o Apt::Install-Recommends=0 install -y -q \
          bcron \
          daemontools \
