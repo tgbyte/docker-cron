@@ -1,8 +1,7 @@
-FROM debian:8
+FROM armhf/debian:jessie
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    DUMBINIT_VERSION=1.2.0 \
-    DUMBINIT_SHA256SUM=81231da1cd074fdc81af62789fead8641ef3f24b6b07366a1c34e5b059faf363
+    DUMBINIT_VERSION=1.2.0
 
 RUN set -x \
     && apt-get update -qq \
@@ -14,15 +13,17 @@ RUN set -x \
     && apt-get update -qq \
     && apt-get -o Apt::Install-Recommends=0 install -y -q \
          bcron \
+         build-essential \
          daemontools \
          supervisor \
          ucspi-unix \
-    && wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMBINIT_VERSION}/dumb-init_${DUMBINIT_VERSION}_amd64 \
-    && echo "${DUMBINIT_SHA256SUM}  /usr/local/bin/dumb-init" > /tmp/SHA256SUM \
-    && sha256sum -c /tmp/SHA256SUM \
-    && rm /tmp/SHA256SUM \
-    && chmod +x /usr/local/bin/dumb-init \
+    && echo $DUMBINIT_VERSION \
+    && (curl -L https://github.com/Yelp/dumb-init/archive/v${DUMBINIT_VERSION}.tar.gz | tar -C /tmp -xzf -) \
+    && ls -al /tmp \
+    && gcc -std=gnu99 -s -Wall -Werror -O3 -o /usr/local/sbin/dumb-init /tmp/dumb-init-*/dumb-init.c \
+    && rm -rf /tmp/dumb-init-* \
     && apt-get remove -y --purge \
+         build-essential \
          curl \
          wget \
     && rm -rf /var/lib/apt/lists/* \
