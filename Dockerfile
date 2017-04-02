@@ -42,7 +42,7 @@ RUN mkdir /entrypoint.d
 ADD /entrypoint.d/*.sh /entrypoint.d/
 ADD ./entrypoint.sh /
 
-ENTRYPOINT ["/usr/local/bin/dumb-init"]
+ENTRYPOINT ["/usr/local/sbin/dumb-init"]
 CMD ["/entrypoint.sh"]
 
 ONBUILD ADD ./cron/ /etc/
