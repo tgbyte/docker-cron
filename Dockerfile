@@ -1,8 +1,8 @@
 FROM debian:buster
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    DUMBINIT_VERSION=1.2.0 \
-    DUMBINIT_SHA256SUM=81231da1cd074fdc81af62789fead8641ef3f24b6b07366a1c34e5b059faf363
+    DUMBINIT_VERSION=1.2.1 \
+    DUMBINIT_SHA256SUM=057ecd4ac1d3c3be31f82fc0848bf77b1326a975b4f8423fe31607205a0fe945
 
 RUN set -x \
     && apt-get update -qq \
