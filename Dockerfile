@@ -1,4 +1,4 @@
-FROM debian:8
+FROM debian:buster
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DUMBINIT_VERSION=1.2.0 \
