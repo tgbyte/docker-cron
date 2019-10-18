@@ -1,0 +1,4 @@
+build-image:
+  stage: build
+  image: tgbyte/builder
+  script: build-image.sh
