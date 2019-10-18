@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:10
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DUMBINIT_VERSION=1.2.1 \
@@ -30,18 +30,17 @@ RUN set -x \
     && touch /etc/crontab \
     && mkdir /etc/cron.d \
     && mkdir -p /var/spool/cron/crontabs \
-    && mkdir -p /var/spool/cron/tmp
+    && mkdir -p /var/spool/cron/tmp \
+    && mkdir -p /entrypoint.d /log /etc/supervisor/conf.d/supervisord.conf.d
 
 ADD ./etc/bcron /etc/bcron
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN mkdir /etc/supervisor/conf.d/supervisord.conf.d
 
-RUN mkdir /entrypoint.d
-ADD /entrypoint.d/*.sh /entrypoint.d/
-ADD ./entrypoint.sh /
+ADD entrypoint.d/*.sh /entrypoint.d/
+ADD entrypoint.sh /bin/
 
 ENTRYPOINT ["/usr/local/bin/dumb-init"]
-CMD ["/entrypoint.sh"]
+CMD ["/bin/entrypoint.sh"]
 
 ONBUILD ADD ./cron/ /etc/
