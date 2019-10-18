@@ -19,12 +19,13 @@ RUN set -x \
          ca-certificates \
          dumb-init \
          daemontools \
+         parallel \
          supervisor \
          ucspi-unix \
     && rm -rf /var/lib/apt/lists/* \
     && adduser --system --no-create-home --home /var/spool/cron cron \
     && touch /etc/crontab \
-    && mkdir /etc/cron.d \
+    && mkdir -p /etc/cron.d \
     && mkdir -p /var/spool/cron/crontabs \
     && mkdir -p /var/spool/cron/tmp \
     && mkdir -p /entrypoint.d /log /etc/supervisor/conf.d/supervisord.conf.d
