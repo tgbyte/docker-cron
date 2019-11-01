@@ -28,7 +28,8 @@ RUN set -x \
     && mkdir -p /etc/cron.d \
     && mkdir -p /var/spool/cron/crontabs \
     && mkdir -p /var/spool/cron/tmp \
-    && mkdir -p /entrypoint.d /log /etc/supervisor/conf.d/supervisord.conf.d
+    && mkdir -p /entrypoint.d /log /etc/supervisor/conf.d/supervisord.conf.d \
+    && rm /etc/cron.d/sysstat
 
 ADD ./etc/bcron /etc/bcron
 
