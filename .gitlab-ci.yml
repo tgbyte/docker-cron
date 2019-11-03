@@ -1,6 +1,7 @@
 stages:
   - build-image
   - build-manifest
+  - build-downstream
 variables:
   MULTIARCH: 1
 
@@ -25,3 +26,11 @@ build-manifest:
   stage: build-manifest
   script:
     - build-manifest.sh
+
+build-docker-borg-archive:
+  stage: build-downstream
+  trigger: docker/borg-archive
+
+build-docker-mydumper:
+  stage: build-downstream
+  trigger: docker/mydumper
