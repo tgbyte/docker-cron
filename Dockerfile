@@ -24,6 +24,7 @@ RUN set -x \
          ucspi-unix \
     && rm -rf /var/lib/apt/lists/* \
     && adduser --system --no-create-home --home /var/spool/cron cron \
+    && rm /etc/crontab \
     && touch /etc/crontab \
     && mkdir -p /etc/cron.d \
     && mkdir -p /var/spool/cron/crontabs \
