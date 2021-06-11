@@ -22,6 +22,11 @@ build-image-arm:
   variables:
     ARCH: arm
 
+build-image-arm64:
+  <<: *build-image
+  variables:
+    ARCH: arm64
+
 build-manifest:
   stage: build-manifest
   script:
